@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./App.css";
 import Sketch from "react-p5";
-
+import { DrawRect } from "./DrawRect";
 function insertPhotoView(input) {
   let photoView = document.querySelector(".photo-view");
   let photoWrap = document.querySelector(".photo-wrap");
@@ -19,7 +19,6 @@ function App() {
   let canvasWidth = 640;
   let canvasHeight = 320;
   let img, input, cnv;
-  let recordRectCoordinate = { x1: 0, y1: 0, x2: 0, y2: 0, w: 0, h: 0 };
 
   const [rectCoordinates, setRectCoordinates] = React.useState([
     { x: 0, y: 0 },
@@ -29,56 +28,37 @@ function App() {
   ]);
 
   const setup = (p5, canvasParentRef) => {
+    let DrawRectClass = new DrawRect(p5);
     cnv = p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
-    p5.stroke(0);
     input = p5.createFileInput((file) => handleFile(file, p5));
     insertPhotoView(input.elt);
 
-    // p5.noLoop();
     cnv.mousePressed((event) => {
       console.log("mousePressed");
-      recordRectCoordinate = {
-        ...recordRectCoordinate,
-        x1: p5.mouseX,
-        y1: p5.mouseY,
-      };
+      DrawRectClass.update({ x1: p5.mouseX, y1: p5.mouseY });
     });
     cnv.mouseClicked((event) => {
       console.log("mouseClicked");
-      // p5.clear();
-      recordRectCoordinate = {
-        ...recordRectCoordinate,
-        x2: p5.mouseX,
-        y2: p5.mouseY,
-        w: p5.mouseX - recordRectCoordinate.x1,
-        h: p5.mouseY - recordRectCoordinate.y1,
-      };
-      p5.noFill();
-      p5.stroke(255, 0, 0);
-      p5.rect(
-        recordRectCoordinate.x1,
-        recordRectCoordinate.y1,
-        recordRectCoordinate.w,
-        recordRectCoordinate.h
-      );
+      DrawRectClass.display();
+      let { x1, y1, x2, y2 } = DrawRectClass.coordinate;
 
       setRectCoordinates((prev) =>
         prev.map((v, i) => {
           // 左上
           if (i === 0) {
-            v = { x: recordRectCoordinate.x1, y: recordRectCoordinate.y1 };
+            v = { x: x1, y: y1 };
           }
           // 右上
           if (i === 1) {
-            v = { x: recordRectCoordinate.x2, y: recordRectCoordinate.y1 };
+            v = { x: x2, y: y1 };
           }
           // 左下
           if (i === 2) {
-            v = { x: recordRectCoordinate.x1, y: recordRectCoordinate.y2 };
+            v = { x: x1, y: y2 };
           }
           // 右下
           if (i === 3) {
-            v = { x: recordRectCoordinate.x2, y: recordRectCoordinate.y2 };
+            v = { x: x2, y: y2 };
           }
           return v;
         })
@@ -87,19 +67,15 @@ function App() {
   };
 
   const draw = (p5) => {
+    let DrawRectClass = new DrawRect(p5);
     if (img) {
       let width = (img.width * canvasHeight) / img.height;
-
       let x = (canvasWidth - width) / 2;
       p5.image(img, x, 0, width, canvasHeight);
     }
     if (p5.mouseIsPressed) {
-      console.log("mouseIsPressed");
-      recordRectCoordinate = {
-        ...recordRectCoordinate,
-        x2: p5.mouseX,
-        y2: p5.mouseY,
-      };
+      // console.log("mouseIsPressed");
+      DrawRectClass.update({ x2: p5.mouseX, y2: p5.mouseY });
     }
   };
 
