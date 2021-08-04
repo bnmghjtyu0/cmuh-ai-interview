@@ -114,6 +114,11 @@ function App() {
     alert(JSON.stringify({ rectCoordinates }));
   }
 
+  function touchMoved(p5) {
+    p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+    return false;
+  }
+
   return (
     <div className="App">
       <div className="layoutBox">
@@ -121,7 +126,7 @@ function App() {
           <div className="photo-wrap">
             <h1 className="mb-20 text-align-center">標記系統</h1>
             <div className="photo-view">
-              <Sketch setup={setup} draw={draw} />
+              <Sketch setup={setup} draw={draw} touchMoved={touchMoved} />
             </div>
           </div>
         </div>
