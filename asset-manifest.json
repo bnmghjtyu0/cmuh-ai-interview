@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/cmuh-ai-interview/static/css/main.ede0b897.chunk.css",
+    "main.js": "/cmuh-ai-interview/static/js/main.bbe663b2.chunk.js",
+    "main.js.map": "/cmuh-ai-interview/static/js/main.bbe663b2.chunk.js.map",
+    "runtime-main.js": "/cmuh-ai-interview/static/js/runtime-main.edd022e3.js",
+    "runtime-main.js.map": "/cmuh-ai-interview/static/js/runtime-main.edd022e3.js.map",
+    "static/js/2.2416fd12.chunk.js": "/cmuh-ai-interview/static/js/2.2416fd12.chunk.js",
+    "static/js/2.2416fd12.chunk.js.map": "/cmuh-ai-interview/static/js/2.2416fd12.chunk.js.map",
+    "static/js/3.a0051e76.chunk.js": "/cmuh-ai-interview/static/js/3.a0051e76.chunk.js",
+    "static/js/3.a0051e76.chunk.js.map": "/cmuh-ai-interview/static/js/3.a0051e76.chunk.js.map",
+    "index.html": "/cmuh-ai-interview/index.html",
+    "static/css/main.ede0b897.chunk.css.map": "/cmuh-ai-interview/static/css/main.ede0b897.chunk.css.map",
+    "static/js/2.2416fd12.chunk.js.LICENSE.txt": "/cmuh-ai-interview/static/js/2.2416fd12.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.edd022e3.js",
+    "static/js/2.2416fd12.chunk.js",
+    "static/css/main.ede0b897.chunk.css",
+    "static/js/main.bbe663b2.chunk.js"
+  ]
+}
